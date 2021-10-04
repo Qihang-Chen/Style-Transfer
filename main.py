@@ -86,7 +86,7 @@ def image_postprocessing(img, img_size):
 weight = [1, 1e2, 10]
 style_weight = [1, 0.8, 0.5, 0.3, 0.1]
 extract_list = [0, 5, 10, 19, 28]
-style_image_path = "22.jpeg"
+style_image_path = "style.jpeg"
 content_image_path = "content.png"
 style_img, style_img_size = image_preprocessing(style_image_path)
 content_img, content_img_size = image_preprocessing(content_image_path)
@@ -98,7 +98,7 @@ vgg = vgg.cuda()
 gen_img = content_img.clone()
 gen_img.requires_grad = True
 gen_img = gen_img.cuda()
-optimizer = torch.optim.Adam([gen_img], lr=0.003)
+optimizer = torch.optim.Adam([gen_img], lr=1e-4)
 writter = SummaryWriter("log")
 trans_totensor = torchvision.transforms.ToTensor()
 writter.add_image("style_image&content_image", trans_totensor(image_postprocessing(style_img, style_img_size)), 0)
